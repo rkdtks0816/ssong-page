@@ -11,7 +11,7 @@ const Card: React.FC<{ post: Post; path: string }> = ({ post, path }) => {
 
   return (
     <>
-      <CardContainer onClick={() => router.push(path + `/${post.title}`)}>
+      <CardContainer onClick={() => router.push(path + `/${post._id}`)}>
         <CardTitle>{post.title}</CardTitle>
         <CardTag>{changeTime(post.time)}</CardTag>
       </CardContainer>

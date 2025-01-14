@@ -4,14 +4,12 @@ import { useRouter } from "next/router";
 
 const BlogDetail: React.FC = () => {
   const router = useRouter();
-  const { title } = router.query;
-
-  const query = { title };
+  const { id } = router.query;
   return (
     <Detail
       redirect={PATHS.PROJECT.ROOT}
       collection={COLLECTIONS.PROJECT.POSTS}
-      query={query}
+      id={id as string}
     />
   );
 };

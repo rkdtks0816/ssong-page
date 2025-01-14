@@ -44,6 +44,7 @@ const Blog: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
+    console.log(tags);
     if (tags && tags.length > 0) {
       const allPostsTag: Tag = { name: "전체 게시글", _id: "all-posts" };
       setAllTags([allPostsTag, ...tags]);

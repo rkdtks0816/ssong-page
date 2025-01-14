@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { ObjectId } from "mongodb";
 import clientPromise from "../../../lib/mongodb";
 
 export default async function handler(
@@ -6,7 +7,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "GET") {
-    const { dbName, collectionName, query } = req.query;
+    const { dbName, collectionName, query, id } = req.query;
 
     if (!dbName || !collectionName) {
       return res.status(400).json({ message: "Missing required fields" });
@@ -16,17 +17,24 @@ export default async function handler(
       const client = await clientPromise;
       const db = client.db(dbName as string);
 
-      // Query 파라미터 처리
-      const parsedQuery =
-        query && query !== "undefined" && typeof query === "string"
-          ? JSON.parse(query)
-          : {};
+      let data;
 
-      // MongoDB에서 데이터 조회
-      const data = await db
-        .collection(collectionName as string)
-        .find(parsedQuery)
-        .toArray();
+      // ID 기반 검색
+      if (id) {
+        data = await db
+          .collection(collectionName as string)
+          .findOne({ _id: new ObjectId(id as string) });
+      } else {
+        // Query 파라미터 처리
+        const parsedQuery =
+          query && query !== "undefined" && typeof query === "string"
+            ? JSON.parse(query)
+            : {};
+        data = await db
+          .collection(collectionName as string)
+          .find(parsedQuery)
+          .toArray();
+      }
 
       res.status(200).json(data);
     } catch (error) {

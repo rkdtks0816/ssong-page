@@ -1,10 +1,18 @@
+const ROOT = "/api";
+const DATA = `${ROOT}/data`;
+const AUTH = `${ROOT}/auth`;
+
 export const API_ENDPOINTS = {
-  BLOG: {
-    LIST: "/api/blogs",
-    DETAIL: (id: string) => `/api/blogs/${id}`,
+  ROOT,
+  DATA: {
+    ROOT: DATA,
+    CREATE: `${DATA}/create`,
+    READ: `${DATA}/read`,
+    UPDATE: `${DATA}/update`,
+    DELETE: `${DATA}/delete`,
   },
-  USER: {
-    LOGIN: "/api/auth/login",
-    PROFILE: (userId: string) => `/api/users/${userId}`,
+  AUTH: {
+    ROOT: AUTH,
+    LOGIN: `${DATA}/login`,
   },
 };

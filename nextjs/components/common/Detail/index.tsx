@@ -18,21 +18,21 @@ import { DATABASES } from "@/shared/constants";
 const Detail: React.FC<{
   redirect: string;
   collection: string;
-  query: Record<string, unknown>;
-}> = ({ redirect, collection, query }) => {
+  id: string;
+}> = ({ redirect, collection, id }) => {
   const router = useRouter();
 
   const { fetchData: postFetchData } = useCrud({
     dbName: DATABASES.CONTENT,
     collectionName: collection,
-    query,
+    id,
   });
   const {
     data: post,
     isLoading: postLoading,
     isError: postError,
   } = postFetchData as {
-    data: Post[] | undefined;
+    data: Post | undefined;
     isLoading: boolean;
     isError: boolean;
   };
@@ -55,11 +55,11 @@ const Detail: React.FC<{
           {post && (
             <Content>
               <ContentHeader>
-                <DetailTitle>{post[0].title}</DetailTitle>
-                <DetailTag>{`${changeTime(post[0].time)}`}</DetailTag>
-                <DetailTag>{"#" + post[0].tags.join(" #")}</DetailTag>
+                <DetailTitle>{post.title}</DetailTitle>
+                <DetailTag>{`${changeTime(post.time)}`}</DetailTag>
+                <DetailTag>{"#" + post.tags.join(" #")}</DetailTag>
               </ContentHeader>
-              <MarkdownRenderer content={post[0].content} />
+              <MarkdownRenderer content={post.content} />
             </Content>
           )}
         </DetailContent>

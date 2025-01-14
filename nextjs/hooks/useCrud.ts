@@ -1,3 +1,4 @@
+import { API_ENDPOINTS } from "@/shared/constants";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 interface CrudOptions {
@@ -5,6 +6,7 @@ interface CrudOptions {
   collectionName: string;
   token?: string | null;
   query?: Record<string, any>;
+  id?: string;
 }
 
 export default function useCrud({
@@ -12,23 +14,34 @@ export default function useCrud({
   collectionName,
   token,
   query,
+  id,
 }: CrudOptions) {
   const queryClient = useQueryClient();
 
   // Read (누구나 볼 수 있음)
   const fetchData = useQuery({
-    queryKey: ["data", dbName, collectionName, query],
+    queryKey: ["data", dbName, collectionName, id || query],
     queryFn: async () => {
-      const queryString = encodeURIComponent(JSON.stringify(query));
-      const response = await fetch(
-        `/api/data/read?dbName=${dbName}&collectionName=${collectionName}&query=${queryString}`
-      );
+      let apiUrl = `${API_ENDPOINTS.DATA.READ}?dbName=${dbName}&collectionName=${collectionName}`;
+
+      if (id) {
+        // ID로 검색할 경우
+        apiUrl += `&id=${id}`;
+      } else if (query) {
+        // Query로 검색할 경우
+        const queryString = encodeURIComponent(JSON.stringify(query));
+        apiUrl += `&query=${queryString}`;
+      }
+
+      const response = await fetch(apiUrl);
+
       if (!response.ok) {
         throw new Error("Failed to fetch data");
       }
+
       return response.json();
     },
-    staleTime: 1000 * 60 * 5, // 5분 동안 데이터 캐싱
+    staleTime: 1000 * 60 * 5,
   });
 
   // Create (토큰 필요)
@@ -37,7 +50,7 @@ export default function useCrud({
       if (!token) {
         throw new Error("Authentication token is missing");
       }
-      const response = await fetch("/api/data/create", {
+      const response = await fetch(API_ENDPOINTS.DATA.CREATE, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -64,7 +77,7 @@ export default function useCrud({
       if (!token) {
         throw new Error("Authentication token is missing");
       }
-      const response = await fetch("/api/data/update", {
+      const response = await fetch(API_ENDPOINTS.DATA.UPDATE, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -91,7 +104,7 @@ export default function useCrud({
       if (!token) {
         throw new Error("Authentication token is missing");
       }
-      const response = await fetch("/api/data/delete", {
+      const response = await fetch(API_ENDPOINTS.DATA.DELETE, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
