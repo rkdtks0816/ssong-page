@@ -143,6 +143,7 @@ function parseMarkdown(markdown: string) {
     '<a href="$2">$1</a>'
   ); // 링크
   html = html.replace(/^(?!<.*?>)(.+)$/gm, "<p>$1</p>"); // 글자만 있는 줄
+  html = html.replace(/(?<!\\)\\(.*?)/gm, "$1");
   html = html.replace(/<CODEBLOCK(\d+)>/g, (_, index) => {
     const code = codeBlocks[parseInt(index)];
     return `<pre><code>\n${escapeHtml(code)}\n\n</code></pre>`;
