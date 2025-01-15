@@ -8,7 +8,6 @@ import {
   Content,
   ContentHeader,
   DetailContainer,
-  DetailContent,
   DetailTag,
   DetailTitle,
 } from "./styles";
@@ -45,7 +44,6 @@ const Detail: React.FC<{
   return (
     <>
       <DetailContainer>
-        <DetailContent>
           <BackButtonContainer>
             <BackButton onClick={() => router.push(redirect)}>⫷</BackButton>
           </BackButtonContainer>
@@ -62,7 +60,6 @@ const Detail: React.FC<{
               <MarkdownRenderer content={post.content} />
             </Content>
           )}
-        </DetailContent>
       </DetailContainer>
     </>
   );

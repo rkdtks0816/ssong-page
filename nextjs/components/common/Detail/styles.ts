@@ -14,7 +14,9 @@ export const DetailTag = styled.p`
 export const BackButtonContainer = styled.div`
   position: absolute;
   top: 0;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 640px;
   width: 100%;
   height: 50px;
   display: flex;
@@ -32,18 +34,7 @@ export const BackButton = styled.div`
 `;
 
 export const DetailContainer = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 999;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-`;
-
-export const DetailContent = styled.div`
+  position: relative;
   background-color: #fff;
   width: 100%;
   height: 100%;
