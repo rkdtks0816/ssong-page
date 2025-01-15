@@ -68,7 +68,9 @@ export default async function handler(
           .collection(collectionName)
           .insertOne(dataWithTime);
 
-        res.status(201).json({ message: "Data inserted", result });
+        res
+          .status(201)
+          .json({ message: "Data inserted", id: result.insertedId });
       } catch (error) {
         res.status(500).json({ message: "Failed to insert data", error });
       }

@@ -61,7 +61,8 @@ export default function useCrud({
       if (!response.ok) {
         throw new Error("Failed to create data");
       }
-      return response.json();
+      const result = await response.json();
+      return result.id;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({

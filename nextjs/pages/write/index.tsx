@@ -95,10 +95,8 @@ const Write: React.FC = () => {
     };
 
     createData.mutate(postData, {
-      onSuccess: () => {
-        router.push(
-          (isBlog ? PATHS.BLOG.ROOT : PATHS.PROJECT.ROOT) + `/${inputTitle}`
-        );
+      onSuccess: (id) => {
+        router.push((isBlog ? PATHS.BLOG.ROOT : PATHS.PROJECT.ROOT) + `/${id}`);
       },
       onError: (error) => {
         console.error("Failed to create post:", error);
