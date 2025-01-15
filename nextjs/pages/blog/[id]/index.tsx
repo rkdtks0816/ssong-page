@@ -1,5 +1,4 @@
 import Detail from "@/components/common/Detail";
-import { COLLECTIONS, PATHS } from "@/shared/constants";
 import { useRouter } from "next/router";
 
 const BlogDetail: React.FC = () => {
@@ -8,8 +7,7 @@ const BlogDetail: React.FC = () => {
 
   return (
     <Detail
-      redirect={PATHS.BLOG.ROOT}
-      collection={COLLECTIONS.BLOG.POSTS}
+      isBlog={true}
       id={id as string}
     />
   );

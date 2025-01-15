@@ -105,7 +105,7 @@ const Project: React.FC = () => {
                       />
                     ))}
               </Modal>
-              <PlusButton />
+              <PlusButton paths={PATHS.PROJECT.CREATE} />
             </>
           )}
         </>

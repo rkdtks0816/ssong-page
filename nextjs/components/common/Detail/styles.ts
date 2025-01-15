@@ -32,6 +32,11 @@ export const BackButton = styled.div`
   cursor: pointer;
   color: ${COLORS.text};
 `;
+export const EditButtons = styled.div`
+  margin-left: auto;
+  margin-right: 20px;
+  display: flex;
+`;
 
 export const DetailContainer = styled.div`
   position: relative;

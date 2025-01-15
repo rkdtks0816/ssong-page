@@ -89,12 +89,12 @@ export default function useCrud({
       if (!response.ok) {
         throw new Error("Failed to update data");
       }
-      return response.json();
+      const result = await response.json();
+      return result.id;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["data", dbName, collectionName],
-        exact: true, // 특정 쿼리만 무효화
       });
     },
   });
