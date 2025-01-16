@@ -81,8 +81,9 @@ const WriteForm: React.FC<WriteFormProps> = ({ isBlog, postId }) => {
       setInputTitle(post.title);
       setSelectedTags(post.tags);
       setInputContent(post.content);
+      handleTextareaInput();
     }
-  }, [postId, post]);
+  }, [postId, post, inputContent]);
 
   const toggleTag = (tag: string) => {
     if (selectedTags.some((t) => t === tag)) {
