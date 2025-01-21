@@ -81,9 +81,12 @@ const WriteForm: React.FC<WriteFormProps> = ({ isBlog, postId }) => {
       setInputTitle(post.title);
       setSelectedTags(post.tags);
       setInputContent(post.content);
-      handleTextareaInput();
     }
-  }, [postId, post, inputContent]);
+  }, [postId, post]);
+
+  useEffect(() => {
+    handleTextareaInput();
+  }, [inputContent]);
 
   const toggleTag = (tag: string) => {
     if (selectedTags.some((t) => t === tag)) {
@@ -213,7 +216,6 @@ const WriteForm: React.FC<WriteFormProps> = ({ isBlog, postId }) => {
               ref={textareaRef}
               value={inputContent}
               onChange={(e) => setInputContent(e.target.value)}
-              onInput={handleTextareaInput}
               required
               placeholder="내용을 입력하세요."
             />
