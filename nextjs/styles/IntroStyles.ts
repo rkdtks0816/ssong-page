@@ -16,6 +16,7 @@ export const IntroSongKangSan = styled.img`
 
 export const IntroInfoContainer = styled.div`
   position: absolute;
+  max-width: 450px;
   right: 0;
   top: 20%;
   display: flex;
