@@ -1,5 +1,5 @@
 export const SKILLS = [
-  { label: "C/C++", level: 3 },
-  { label: "STM32", level: 2 },
-  { label: "RTOS", level: 2 },
+  { label: "C/C++", level: 2 },
+  { label: "Verilog", level: 1 },
+  { label: "SystemVerilog", level: 1 },
 ];
